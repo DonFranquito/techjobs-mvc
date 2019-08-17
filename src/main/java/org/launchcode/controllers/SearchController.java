@@ -25,30 +25,18 @@ public class SearchController {
     // TODO #1 - Create handler to process search request and display results
 
     @RequestMapping(value="results")
-    public String search(Model model, HttpServletRequest request) {
+    public String search(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
 
         model.addAttribute("columns", ListController.columnChoices);
 
-        //will change to @requestparam after solving other issues
-        String searchType = request.getParameter("searchType");
-        String searchTerm = request.getParameter("searchTerm");
-
-        //just to check that I'm actually pulling the information from the user
-        System.out.println(searchTerm);
-        System.out.println(searchType);
-        System.out.println(JobData.findByValue(searchTerm));
-
-        if (searchType == "all"){
+        //makes different calls to JobData class depending on searchType and then
+        //passes that data to the model
+        if (searchType.equals("all")){
             model.addAttribute("jobs",JobData.findByValue(searchTerm));
-            System.out.println("made it here");
+            return "search";
         } else {
             model.addAttribute("jobs",JobData.findByColumnAndValue(searchType,searchTerm));
-            System.out.println("made it hereee");
+            return "search";
         }
-
-
-
-
-        return "search";
     }
 }

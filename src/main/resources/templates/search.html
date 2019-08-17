@@ -36,16 +36,22 @@
 
     <hr />
 
+
     <!-- loop over the jobs ArrayList<HashMap<String, String>> -->
-    <div th:each="map : ${jobs}">
-        <table class="job-listing">
-            <tbody th:each="item : ${map}">
-                <tr>
-                    <td th:text="${item.key}"></td>
-                    <td th:text="${item.value}"></td>
-                </tr>
-            </tbody>
-        </table>
+    <div th:fragment="results">
+        <div th:if="${jobs}">
+            <h3 th:text="${#arrays.length(jobs) + ' Result(s)'}"></h3>
+            <div th:each="map : ${jobs}">
+                <table class="job-listing">
+                    <tbody>
+                        <tr th:each="item : ${map}">
+                            <td th:text="${#strings.capitalizeWords(item.key)}"></td>
+                            <td th:text="${item.value}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 
