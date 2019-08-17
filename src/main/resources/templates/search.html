@@ -36,6 +36,20 @@
 
     <hr />
 
+    <!-- loop over the jobs ArrayList<HashMap<String, String>> -->
+    <div th:each="map : ${jobs}">
+        <table class="job-listing">
+            <tbody th:each="item : ${map}">
+                <tr>
+                    <td th:text="${item.key}"></td>
+                    <td th:text="${item.value}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
     <!-- TODO #2 - Loop over jobs map to display all job fields -->
 
 </div>
